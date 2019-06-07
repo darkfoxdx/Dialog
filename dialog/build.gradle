@@ -12,7 +12,7 @@ android {
         def artifactProjectID = 'dialog'
         def publishVersionID = '1.0'
 
-        userOrg = 'projecteugene'
+        userOrg = 'darkfoxdx'
         repoName = 'Dialog'
         groupId = groupProjectID
         artifactId = artifactProjectID
