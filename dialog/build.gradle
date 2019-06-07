@@ -1,12 +1,27 @@
+apply plugin: 'com.novoda.bintray-release'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
+
+    publish {
+
+        def groupProjectID = 'com.projecteugene.dialog'
+        def artifactProjectID = 'dialog'
+        def publishVersionID = '1.0'
+
+        userOrg = 'projecteugene'
+        repoName = 'Dialog'
+        groupId = groupProjectID
+        artifactId = artifactProjectID
+        publishVersion = publishVersionID
+        desc = 'Simplified builder for Android Dialog with RxJava.'
+        website = 'https://github.com/darkfoxdx/Dialog'
+    }
+
     compileSdkVersion 28
-
-
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 28
