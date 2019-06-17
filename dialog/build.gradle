@@ -7,13 +7,12 @@ apply plugin: 'kotlin-kapt'
 android {
 
     publish {
-
         def groupProjectID = 'com.projecteugene'
         def artifactProjectID = 'dialog'
         def publishVersionID = '1.0'
 
         userOrg = 'darkfoxdx'
-        repoName = 'Project'
+        repoName = 'Projects'
         groupId = groupProjectID
         artifactId = artifactProjectID
         publishVersion = publishVersionID
