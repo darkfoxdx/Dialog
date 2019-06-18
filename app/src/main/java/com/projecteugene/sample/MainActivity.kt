@@ -12,6 +12,6 @@ class MainActivity : AppCompatActivity() {
 
         DialogBuilder(this, supportFragmentManager, "SampleDialogTag")
             .setMessage("This is a sample dialog")
-            .show<Nothing>()
+            .show()
     }
 }
