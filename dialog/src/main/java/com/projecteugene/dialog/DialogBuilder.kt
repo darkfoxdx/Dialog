@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentManager
  */
 class DialogBuilder(private val context: Context,
                     private val fragmentManager: FragmentManager?,
-                    private val dialogTag: String) {
+                    private val dialogTag: String? = null) {
     private val bundle: Bundle = Bundle()
 
     init {
@@ -102,6 +102,15 @@ class DialogBuilder(private val context: Context,
     }
     fun setCancelable(cancelable: Boolean) = apply {
         bundle.putBoolean(DialogConst.CANCELABLE, cancelable)
+    }
+    fun setDismissiblePositiveOnClick(dismissOnClick: Boolean) = apply {
+        bundle.putBoolean(DialogConst.DISMISSIBLE_POSITIVE_ON_CLICK, dismissOnClick)
+    }
+    fun setDismissibleNegativeOnClick(dismissOnClick: Boolean) = apply {
+        bundle.putBoolean(DialogConst.DISMISSIBLE_NEGATIVE_ON_CLICK, dismissOnClick)
+    }
+    fun setDismissibleNeutralOnClick(dismissOnClick: Boolean) = apply {
+        bundle.putBoolean(DialogConst.DISMISSIBLE_NEUTRAL_ON_CLICK, dismissOnClick)
     }
 
     fun <T: ViewDataBinding> show(binding: T? = null): CustomDialogFragment<T> {

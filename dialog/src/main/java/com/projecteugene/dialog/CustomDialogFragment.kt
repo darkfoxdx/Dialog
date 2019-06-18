@@ -4,9 +4,7 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Parcelable
-import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import io.reactivex.Observable
@@ -61,8 +59,17 @@ open class CustomDialogFragment<T: ViewDataBinding>(var binding: T? = null) : Di
     private val hasBinding: Boolean
         get() = arguments?.getBoolean(DialogConst.HAS_BINDING, false)?:false
 
-    val dialogTag: String
-        get() = arguments?.getString(DialogConst.DIALOG_TAG, "")?:""
+    private val dismissiblePositiveOnClick: Boolean
+        get() = arguments?.getBoolean(DialogConst.DISMISSIBLE_POSITIVE_ON_CLICK, true)?:true
+
+    private val dismissibleNegativeOnClick: Boolean
+        get() = arguments?.getBoolean(DialogConst.DISMISSIBLE_NEGATIVE_ON_CLICK, true)?:true
+
+    private val dismissibleNeutralOnClick: Boolean
+        get() = arguments?.getBoolean(DialogConst.DISMISSIBLE_NEUTRAL_ON_CLICK, true)?:true
+
+    private val dialogTag: String?
+        get() = arguments?.getString(DialogConst.DIALOG_TAG, null)
 
     private val mode: DialogConst.Mode?
         get() = arguments?.getSerializable(DialogConst.MODE) as DialogConst.Mode?
@@ -73,31 +80,25 @@ open class CustomDialogFragment<T: ViewDataBinding>(var binding: T? = null) : Di
     val onDialogShown: Observable<Dialog>
         get() = onDialogShownSubject
 
-    private val onDialogDismissSubject: PublishSubject<DialogInterface> = PublishSubject.create<DialogInterface>()
-    val onDialogDismiss: Observable<DialogInterface>
+    private val onDialogDismissSubject: PublishSubject<Dialog> = PublishSubject.create<Dialog>()
+    val onDialogDismiss: Observable<Dialog>
         get() = onDialogDismissSubject
 
-    private val onPositiveClickSubject: PublishSubject<DialogInterface> = PublishSubject.create<DialogInterface>()
-    val onPositiveClick: Observable<DialogInterface>
+    private val onPositiveClickSubject: PublishSubject<Dialog> = PublishSubject.create<Dialog>()
+    val onPositiveClick: Observable<Dialog>
         get() = onPositiveClickSubject
 
-    private val onNegativeClickSubject: PublishSubject<DialogInterface> = PublishSubject.create<DialogInterface>()
-    val onNegativeClick: Observable<DialogInterface>
+    private val onNegativeClickSubject: PublishSubject<Dialog> = PublishSubject.create<Dialog>()
+    val onNegativeClick: Observable<Dialog>
         get() = onNegativeClickSubject
 
-    private val onNeutralClickSubject: PublishSubject<DialogInterface> = PublishSubject.create<DialogInterface>()
-    val onNeutralClick: Observable<DialogInterface>
+    private val onNeutralClickSubject: PublishSubject<Dialog> = PublishSubject.create<Dialog>()
+    val onNeutralClick: Observable<Dialog>
         get() = onNeutralClickSubject
 
     private val onItemClickSubject: PublishSubject<DialogItemHolder> = PublishSubject.create<DialogItemHolder>()
     val onItemClick: Observable<DialogItemHolder>
         get() = onItemClickSubject
-
-    override fun onStart() {
-        super.onStart()
-        onDialogShownSubject.onNext(dialog)
-        onDialogShownSubject.onComplete()
-    }
 
     @Suppress("UNUSED_ANONYMOUS_PARAMETER")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -152,30 +153,51 @@ open class CustomDialogFragment<T: ViewDataBinding>(var binding: T? = null) : Di
 
         textPositiveButton?.let {
             builder.setPositiveButton(it) {
-                dialog, id -> onPositiveClickSubject.onNext(dialog)
+                dialog, id -> onPositiveClickSubject.onNext(dialog as Dialog)
             }
         }
         textNegativeButton?.let {
             builder.setNegativeButton(it) {
-                dialog, id -> onNegativeClickSubject.onNext(dialog)
+                dialog, id -> onNegativeClickSubject.onNext(dialog as Dialog)
             }
         }
         textNeutralButton?.let {
             builder.setNeutralButton(it) {
-                dialog, id -> onNeutralClickSubject.onNext(dialog)
+                dialog, id -> onNeutralClickSubject.onNext(dialog as Dialog)
             }
         }
 
         builder.setOnDismissListener {
             dialog->
             super.onDismiss(dialog)
-            onDialogDismissSubject.onNext(dialog)
+            onDialogDismissSubject.onNext(dialog as Dialog)
         }
+
 
         isCancelable = cancelable
 
-        // Create the AlertDialog object and return it
-        return builder.create()
+        // Create the AlertDialog object and return
+        val alertDialog = builder.create()
+        alertDialog.setOnShowListener {dialog->
+            onDialogShownSubject.onNext(dialog as Dialog)
+            onDialogShownSubject.onComplete()
+            if (!dismissiblePositiveOnClick) {
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                    onPositiveClickSubject.onNext(dialog)
+                }
+            }
+            if (!dismissibleNegativeOnClick) {
+                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener {
+                    onNegativeClickSubject.onNext(dialog)
+                }
+            }
+            if (!dismissibleNeutralOnClick) {
+                alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener {
+                    onNeutralClickSubject.onNext(dialog)
+                }
+            }
+        }
+        return alertDialog
     }
 
     companion object {
