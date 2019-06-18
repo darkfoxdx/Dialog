@@ -5,12 +5,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
+    def groupProjectID = 'com.projecteugene'
+    def artifactProjectID = 'dialog'
+    def publishVersionID = '1.1'
 
     publish {
-        def groupProjectID = 'com.projecteugene'
-        def artifactProjectID = 'dialog'
-        def publishVersionID = '1.0'
-
         userOrg = 'darkfoxdx'
         repoName = 'Projects'
         groupId = groupProjectID
@@ -25,7 +24,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName publishVersionID
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
