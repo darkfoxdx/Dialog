@@ -121,9 +121,15 @@ class DialogBuilder(private val context: Context,
     }
 
     fun show(): CustomDialogFragment<Nothing> {
-        val dialogFragment = CustomDialogFragment(null)
+        val dialogFragment: CustomDialogFragment<Nothing> = CustomDialogFragment(null)
         dialogFragment.arguments = bundle
         dialogFragment.show(fragmentManager, dialogTag)
+        return dialogFragment
+    }
+
+    fun build(): CustomDialogFragment<Nothing> {
+        val dialogFragment: CustomDialogFragment<Nothing> = CustomDialogFragment(null)
+        dialogFragment.arguments = bundle
         return dialogFragment
     }
 }
