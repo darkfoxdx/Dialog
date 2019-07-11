@@ -1,4 +1,5 @@
-# Projecteugene Dialog<br/>Simple Dialog Builder using RxJava and Databinding
+# Projecteugene Dialog
+Simple Dialog Builder using RxJava and Databinding
 
 This is a simplified Android dialog fragment builder which is easily customizable. Instead of extending the DialogFragment 
 class each time, you can set the values using the builder and display it. Features includes handling configurable buttons, 
