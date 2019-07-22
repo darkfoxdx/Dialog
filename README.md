@@ -37,7 +37,7 @@ dependencies {
 
 ### Basic implementation 
 
-[Basic Dialog](https://i.imgur.com/mbHepyU.png)
+![Basic Dialog](https://i.imgur.com/mbHepyU.png)
 
 You will need to create an instance of **DialogBuilder** using the constructor. Once the builder is configured, you can 
 call **show()** to display the dialog.
