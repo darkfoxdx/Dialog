@@ -16,6 +16,9 @@ class SampleActivity : AppCompatActivity() {
 
         DialogBuilder(this@SampleActivity, supportFragmentManager)
             .setMessage("This is a sample dialog")
+            .setTextNegativeButton("Negative")
+            .setTextNeutralButton("Neutral")
+            .setTextPositiveButton("Positive")
             .show()
     }
 

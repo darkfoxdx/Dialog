@@ -39,8 +39,8 @@ dependencies {
 
 ![Basic Dialog](https://i.imgur.com/mbHepyU.png)
 
-You will need to create an instance of **DialogBuilder** using the constructor. Once the builder is configured, you can 
-call **show()** to display the dialog.
+You will need to create an instance of ```DialogBuilder``` using the constructor. Once the builder is configured, you can 
+call ```show()``` to display the dialog.
 
 ```
 val builder: DialogBuilder = 
@@ -56,7 +56,7 @@ DialogBuilder(this@MainActivity, supportFragmentManager)
     .show()
 ```
 
-If you want to build it without displaying, you can use **build()** instead.
+If you want to build it without displaying, you can use ```build()``` instead.
 ```
 val fragment: CustomDialogFragment<Nothing> = 
     DialogBuilder(this@MainActivity, supportFragmentManager)
@@ -67,7 +67,7 @@ val fragment: CustomDialogFragment<Nothing> =
 
 ### Negative, Positive and Neutral buttons
 
-By default, the builder is initialized with **setTextNegativeButton(android.R.string.ok)**. 
+By default, the builder is initialized with ```setTextNegativeButton(android.R.string.ok)```. 
 
 However, if you do not want any buttons to be displayed at all, you can do the following.
 
@@ -77,4 +77,16 @@ DialogBuilder(this@MainActivity, supportFragmentManager)
     .setTextNegativeButton(null)
     .show()
 ```
+
+To configure the respective negative, positive and neutral buttons, use the following. Both **Android string ID** and 
+**String** values can be used.
+
+```
+DialogBuilder(this@SampleActivity, supportFragmentManager)
+   .setMessage("This is a sample dialog")
+   .setTextNegativeButton("Negative")
+   .setTextNeutralButton("Neutral")
+   .setTextPositiveButton("Positive")
+   .show()
+   ```
 
