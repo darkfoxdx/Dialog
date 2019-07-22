@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        DialogBuilder(this, supportFragmentManager, "SampleDialogTag")
+        DialogBuilder(this@MainActivity, supportFragmentManager, "SampleDialogTag")
             .setMessage("This is a sample dialog")
             .show()
 

@@ -34,3 +34,22 @@ dependencies {
 ```
 
 ## How To Use
+
+### Basic implementation 
+
+You will need to create an instance of **DialogBuilder** using the constructor. Once the builder is configured, you can 
+call **show()** to display the dialog.
+
+```
+val builder: DialogBuilder = 
+    DialogBuilder(this@MainActivity, supportFragmentManager)
+    .setMessage("This is a sample dialog")
+builder.show()
+```
+
+Alternatively, you can shorten it to:
+```
+DialogBuilder(this@MainActivity, supportFragmentManager)
+    .setMessage("This is a sample dialog")
+    .show()
+```
