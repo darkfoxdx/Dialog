@@ -5,6 +5,14 @@ This is a simplified Android dialog fragment builder which is easily customizabl
 class each time, you can set the values using the builder and display it. Features includes handling configurable buttons, 
 lists, radio buttons, check boxes, custom XML layout, handlers using RxJava and databinding.
 
+## Table of Contents
+1. [Set Up](#set-up)
+2. [How To Use](#how-to-use)
+    1. [Basic implementation](#basic-implementation)
+    2. [Style](#style)
+    3. [Title](#title)
+    4. [Negative, Positive and Neutral buttons](#negative-positive-and-neutral-buttons)
+
 ## Set Up
 
 Make sure you have defined the **jcenter()** repository in project's **build.gradle** file:
