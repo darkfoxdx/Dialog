@@ -2,6 +2,7 @@ package com.projecteugene.sample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.projecteugene.dialog.DialogBuilder
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
                     .setMessage("PIN is not 123456")
                     .show()
             }
+            Log.d("onPositiveClick", "triggered")
         }.addTo(compositeDisposable)
 
     }
