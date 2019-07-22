@@ -64,6 +64,36 @@ val fragment: CustomDialogFragment<Nothing> =
         .build()
 ```
 
+### Style
+
+The default style is used when building the dialog but you can set your own custom style. 
+
+**style.xml**
+```
+<style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog">
+    <item name="android:windowBackground">@null</item>
+</style>
+```
+
+Then you can customize it in the builder.
+
+```
+DialogBuilder(this@MainActivity, supportFragmentManager)
+    .setStyle(R.style.AlertDialogCustom)
+    .setMessage("This is a sample dialog")
+    .show()
+```
+
+### Title
+
+By default, title is not set and will not show. You can customize the text for the title if you want.
+
+```
+DialogBuilder(this@MainActivity, supportFragmentManager)
+    .setTitle("Sample Title")
+    .setMessage("This is a sample dialog")
+    .show()
+```
 
 ### Negative, Positive and Neutral buttons
 
@@ -78,7 +108,7 @@ DialogBuilder(this@MainActivity, supportFragmentManager)
     .show()
 ```
 
-To configure the respective negative, positive and neutral buttons, use the following. Both **Android string ID** and 
+To configure the respective negative, positive and neutral buttons, use the following. Both **Android String ID** and 
 **String** values can be used.
 
 ```
@@ -88,5 +118,7 @@ DialogBuilder(this@SampleActivity, supportFragmentManager)
    .setTextNeutralButton("Neutral")
    .setTextPositiveButton("Positive")
    .show()
-   ```
+```
+
+
 
