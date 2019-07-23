@@ -2,6 +2,7 @@ package com.projecteugene.sample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.projecteugene.dialog.DialogBuilder
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -14,12 +15,25 @@ class SampleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        DialogBuilder(this@SampleActivity, supportFragmentManager)
-            .setMessage("This is a sample dialog")
-            .setTextNegativeButton("Negative")
-            .setTextNeutralButton("Neutral")
-            .setTextPositiveButton("Positive")
-            .show()
+        val fragment =
+            DialogBuilder(this@SampleActivity, supportFragmentManager)
+                .setMessage("This is a sample dialog")
+                .setTextNegativeButton("Negative")
+                .setTextNeutralButton("Neutral")
+                .setTextPositiveButton("Positive")
+                .show()
+
+        fragment.onPositiveClick.subscribe {dialog ->
+            Log.d("onPositiveClick", "triggered")
+        }.addTo(compositeDisposable)
+
+        fragment.onNegativeClick.subscribe {dialog ->
+            Log.d("onNegativeClick", "triggered")
+        }.addTo(compositeDisposable)
+
+        fragment.onNeutralClick.subscribe {dialog ->
+            Log.d("onNeutralClick", "triggered")
+        }.addTo(compositeDisposable)
     }
 
     override fun onDestroy() {

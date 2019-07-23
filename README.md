@@ -130,8 +130,10 @@ DialogBuilder(this@SampleActivity, supportFragmentManager)
 
 **RxJava is required to listen to events. You can also use RxKotlin for the ```addTo``` Kotlin extension**
 
-You can subscribe to the respective ```Observable``` which will listen to when the buttons are clicked.
-```
+You can subscribe to the respective ```Observable``` which will listen to when the buttons are clicked. The ```dialog```
+
+``` 
+
 val compositeDisposable = CompositeDisposable()
 
 val fragment = 
